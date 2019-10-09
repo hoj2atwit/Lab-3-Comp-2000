@@ -18,7 +18,7 @@ public class Route {
 			while(in.hasNext()) {
 				stationsArrList.add(new Station(in.next()));
 			}
-			Station[] stationsArr = (Station[]) stationsArrList.toArray();
+			Station[] stationsArr = stationsArrList.toArray();
 			ArrayList<Passenger> allPassengers = new ArrayList<Passenger>();
 			for(int i = 0; i < stationsArr.length; i++) {
 				int passAmnt = rand.nextInt(6);
@@ -47,7 +47,7 @@ public class Route {
 				}
 			}
 			
-			printAll();
+			printAll(stationsArr);
 			
 			in.close();
 			
@@ -61,8 +61,11 @@ public class Route {
 		for(int i = 0; i < stations.length; i++) {
 			System.out.printf("-----------------------%n%s%n Passengers:%n%n",stations[i].getName());
 			if(stations[i].isHasPassengers()) {
-				for() {
-					System.out.printf("%d, %s%n", .getID, .getStation().getName());
+				Passenger pass = stations[i].getPassengers().dequeue();
+				while(pass != null) {
+					System.out.printf("%d, %s%n", pass.getID(), pass.getDestination().getName());
+					pass = stations[i].getPassengers().dequeue();
+					
 				}
 			} else {
 				System.out.printf("None%n");

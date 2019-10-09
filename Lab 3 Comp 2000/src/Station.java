@@ -6,7 +6,7 @@ public class Station {
 	
 	public Station(String name, LinkedQueue<Passenger> passengers) {
 		this.name = name;
-		this.passengers = passengers;
+		this.setPassengers(passengers);
 	}	
 	
 	public Station(String name) {
@@ -14,7 +14,7 @@ public class Station {
 	}
 	
 	public void addPassenger(Passenger p) {
-		
+		passengers.enqueue(p);
 	}
 	
 	public String getName() {
@@ -31,6 +31,14 @@ public class Station {
 	
 	public void setHasPassengers(boolean hasPassengers) {
 		this.hasPassengers = hasPassengers;
+	}
+
+	public LinkedQueue<Passenger> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(LinkedQueue<Passenger> passengers) {
+		this.passengers = passengers;
 	}
 	
 	

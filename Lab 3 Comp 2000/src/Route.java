@@ -14,18 +14,17 @@ public class Route {
 			in.close();
 			in = new Scanner(stationNamesFile);
 			
-			ArrayList<Station> stationsArrList = new ArrayList<Station>();
-			while(in.hasNext()) {
-				stationsArrList.add(new Station(in.next()));
+			Station[] stationsArr = new Station[17];
+			for(int i = 0; i < stationsArr.length; i++) {
+				stationsArr[i] = (new Station(in.nextLine()));
 			}
-			Station[] stationsArr = stationsArrList.toArray();
 			ArrayList<Passenger> allPassengers = new ArrayList<Passenger>();
 			for(int i = 0; i < stationsArr.length; i++) {
 				int passAmnt = rand.nextInt(6);
 				for(int j = 1; j <= passAmnt; j++) {
 					Passenger pass = new Passenger();
 					int destIndex = -1;
-					while(destIndex != i && destIndex >= 0) {
+					while(destIndex != i && destIndex < 0) {
 						destIndex = rand.nextInt(stationsArr.length);
 					}
 					Station dest = stationsArr[destIndex];
@@ -43,7 +42,8 @@ public class Route {
 							}
 						}
 					}
-					stationsArr[j].addPassenger(pass);
+					stationsArr[i].addPassenger(pass);
+					stationsArr[i].setHasPassengers(true);
 				}
 			}
 			
@@ -63,8 +63,12 @@ public class Route {
 			if(stations[i].isHasPassengers()) {
 				Passenger pass = stations[i].getPassengers().dequeue();
 				while(pass != null) {
-					System.out.printf("%d, %s%n", pass.getID(), pass.getDestination().getName());
-					pass = stations[i].getPassengers().dequeue();
+					System.out.printf("%s, %s%n", pass.getID(), pass.getDestination().getName());
+					try {
+						pass = stations[i].getPassengers().dequeue();
+					}catch(Exception e){
+						pass = null;
+					}
 					
 				}
 			} else {

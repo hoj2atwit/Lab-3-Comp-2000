@@ -1,14 +1,14 @@
 import java.util.Random;
 
 public class Passenger {
-	private int ID;
+	private String ID;
 	private Station destination;
 
-	public int getID() {
+	public String getID() {
 		return ID;
 	}
 
-	public void setID(int ID) {
+	public void setID(String ID) {
 		this.ID = ID;
 	}
 
@@ -23,10 +23,11 @@ public class Passenger {
 	public void randomID() {
 		Random rand = new Random();
 		int[] IDArr = new int[5];
-		for(int i = 0; i <= IDArr.length; i++) {
+		for(int i = 0; i < IDArr.length; i++) {
 			IDArr[i] = rand.nextInt(10);
 		}
-		setID((IDArr[0]*10000) + (IDArr[1]*1000) + (IDArr[2]*100) + (IDArr[3]*10) + (IDArr[4]));
+		
+		setID(String.format("%d%d%d%d%d",IDArr[0], IDArr[1], IDArr[2], IDArr[3], IDArr[4]));
 		
 	}
 	
